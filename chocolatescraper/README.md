@@ -2,10 +2,9 @@
 
 A Scrapy project that scrapes product information (name, price, and URL) from [The Chocolate Company UK](https://www.chocolate.co.uk/collections/all) product listings, following pagination until all products are retrieved. The spider stores data in a **PostgreSQL database** and can optionally export to **JSON** or **CSV** formats.
 
----
-
 ## Project Structure
 
+```text
 chocolatescraper/
 ├── chocolatescraper/           # Project settings and modules
 │   ├── __init__.py
@@ -19,8 +18,8 @@ chocolatescraper/
 ├── requirements.txt            # Dependencies
 ├── .env                        # Environment variables (not pushed to GitHub)
 └── venv/                       # Python virtual environment
+```
 
----
 
 ## Environment Variables
 
