@@ -31,11 +31,15 @@ queuelib==1.8.0
 requests==2.32.4
 requests-file==2.1.0
 Scrapy==2.13.3
+scrapy-user-agents==0.1.1
 service-identity==24.2.0
 setuptools==80.9.0
 tldextract==5.3.0
 Twisted==25.5.0
 typing_extensions==4.14.1
+ua-parser==1.0.1
+ua-parser-builtins==0.18.0.post1
 urllib3==2.5.0
+user-agents==2.2.0
 w3lib==2.3.1
 zope.interface==7.2

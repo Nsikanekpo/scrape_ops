@@ -1,15 +1,33 @@
 import scrapy
 from chocolatescraper.itemsloaders import ChocolateProductLoader
-from chocolatescraper.items import ChocolateProduct 
+from chocolatescraper.items import ChocolateProduct
+from urllib.parse import urlencode
+from environs import Env
+
+
+# ✅ Load environment variables instead of hardcoding API key
+env = Env()
+env.read_env()
+API_KEY = env.str("SCRAPEOPS_API_KEY")  # ✅ API key moved to .env
+
+
+def get_proxy_url(url):
+    payload = {'api_key': API_KEY, 'url': url}
+    proxy_url = 'https://proxy.scrapeops.io/v1/?' + urlencode(payload)
+    return proxy_url
+
 
 class ChocolateSpider(scrapy.Spider):
 
     # the name of the spider
     name = 'chocolatespider'
 
-    # the url of the first page that we will start scraping
-    start_urls = ['https://www.chocolate.co.uk/collections/all']
+    # These are the urls that we will start scraping
+    def start_requests(self):
+        start_url = 'https://www.chocolate.co.uk/collections/all'
+        yield scrapy.Request(url=get_proxy_url(start_url), callback=self.parse)
 
+    
     def parse(self, response):
         products = response.css('product-item')
 
@@ -24,8 +42,8 @@ class ChocolateSpider(scrapy.Spider):
 
         if next_page is not None:
            next_page_url = 'https://www.chocolate.co.uk' + next_page
-           yield response.follow(next_page_url, callback=self.parse)        
- 
+           yield scrapy.Request(url=get_proxy_url(next_page_url), callback=self.parse)
+
         
         
 
