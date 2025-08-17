@@ -18,6 +18,12 @@ chocolatescraper/
 ├── .env                        # Environment variables (not pushed to GitHub)
 └── venv/                       # Python virtual environment
 
+**Notes:**  
+- `middlewares.py` includes proxy and user-agent rotation.  
+- `pipelines.py` includes price conversion, duplicates removal, and PostgreSQL storage.  
+- `.env` stores sensitive credentials like database info and ScrapeOps API key (not pushed to GitHub).  
+
+
 ## Environment Variables
 
 Create a `.env` file in the project root with the following variables:
