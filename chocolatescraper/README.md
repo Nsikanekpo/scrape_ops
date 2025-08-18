@@ -4,6 +4,7 @@ A Scrapy project that scrapes product information (name, price, and URL) from [T
 
 ## Project Structure
 
+```text
 chocolatescraper/
 ├── chocolatescraper/           # Project settings and modules
 │   ├── __init__.py
@@ -18,6 +19,8 @@ chocolatescraper/
 ├── .env                        # Environment variables (not pushed to GitHub)
 └── venv/                       # Python virtual environment
 
+```
+
 **Notes:**  
 - `middlewares.py` includes proxy and user-agent rotation.  
 - `pipelines.py` includes price conversion, duplicates removal, and PostgreSQL storage.  
@@ -28,12 +31,14 @@ chocolatescraper/
 
 Create a `.env` file in the project root with the following variables:
 
+```dotenv
 POSTGRES_HOST=172.17.144.1  
 POSTGRES_DB=chocolate_scraping  
 POSTGRES_USER=postgres  
 POSTGRES_PASSWORD=your_postgres_password  
 GBP_TO_USD_RATE=1.3  
 SCRAPEOPS_API_KEY=your_scrapeops_api_key   # API key for proxy service
+```
 
 > **Important:** `.env` is included in `.gitignore` to keep sensitive credentials out of version control.
 
