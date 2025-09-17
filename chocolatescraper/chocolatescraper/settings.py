@@ -7,6 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+from environs import Env
+
+env = Env()
+env.read_env()
+
+SCRAPEOPS_API_KEY = env("SCRAPEOPS_API_KEY")
+
+
 BOT_NAME = "chocolatescraper"
 
 SPIDER_MODULES = ["chocolatescraper.spiders"]
@@ -49,14 +57,17 @@ DOWNLOAD_DELAY = 1
 DOWNLOADER_MIDDLEWARES = {
 #    "chocolatescraper.middlewares.ChocolatescraperDownloaderMiddleware": 543,
      "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None,
-     "scrapy_user_agents.middlewares.RandomUserAgentMiddleware": 400, 
+     "scrapy_user_agents.middlewares.RandomUserAgentMiddleware": 400,
+     'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
+     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None, 
 }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+EXTENSIONS = {
 #    "scrapy.extensions.telnet.TelnetConsole": None,
-#}
+     'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500,
+}
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
