@@ -7,12 +7,21 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+
+import os
+from dotenv import load_dotenv
+
+
+# Load environment variables from .env file
+load_dotenv()
+
 BOT_NAME = "productscraper"
 
 SPIDER_MODULES = ["productscraper.spiders"]
 NEWSPIDER_MODULE = "productscraper.spiders"
 
-ADDONS = {}
+# ScrapeOps API key (stored in .env file)
+SCRAPEOPS_API_KEY = os.getenv("SCRAPEOPS_API_KEY")
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -50,6 +59,7 @@ DOWNLOADER_MIDDLEWARES = {
 #    "productscraper.middlewares.ProductscraperDownloaderMiddleware": 543,
      "scrapy.downloadermiddlewares.useragent.UserAgentMiddleware": None,
      "scrapy_user_agents.middlewares.RandomUserAgentMiddleware": 400,
+     "scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk": 725,
 }
 
 # Enable or disable extensions
